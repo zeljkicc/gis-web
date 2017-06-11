@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<title>WebGIS</title>
+
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+
+<div>
+	
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span> 
+	      </button>
+	      <a class="navbar-brand" href="#">Tourist WebGIS Guide</a>
+	    </div>
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	      <ul class="nav navbar-nav">
+	        <li class="active"><a href="#">Home</a></li>
+			
+	    </div>
+	  </div>
+	</nav>
+
+<div class="container-fluid">
+
+<div class="row">
+	<div class="col-md-8">
+		<div id="map" style="width: 100%; height: 580px"></div>
+
+	</div>
+	<div class="col-md-4">	
+
+	<div class="panel-group">
+	  <div class="panel panel-primary">
+	    <div class="panel-heading">
+	      <h4 class="panel-title">
+	        <a data-toggle="collapse" href="#collapse1">Filters &amp; Queries</a>
+	      </h4>
+	    </div>
+	    <div id="collapse1" class="panel-collapse collapse">
+	      <div class="panel-body">
+
+
+					<label type="text">Type of places:</label></span>
+					<select class="form-control" id="places_type">	
+						<option value="all" >All</option>		
+						<option value="hotel" >Hotels</option>
+						<option value="restaurant" >Restaurants</option>
+						<option value="monument" >Monuments</option>
+						<option value="coffeepub" >Coffeepubs</option>
+						<option value="cinema" >Cinemas</option>
+						<!--<option value="thingstodo" >Things to do</option>
+						<option value="sport" >Sport &amp; Recreation</option>		
+						<option value="shopping" >Shopping</option>-->
+					  	<option value="culture" >Culture</option>
+				  	</select>				
+				<hr>
+				
+				<label type="text">Roads near selected place:</label>
+				<div class="row">
+					<div class="col-md-4">
+						<select class="form-control" id="radius">
+						  	<option value="0.1">100m</option>
+						    <option value="0.2">200m</option>
+						    <option value="0.3">300m</option>
+						    <option value="0.4">400m</option>
+						    <option value="0.5">500m</option>
+						    <option value="0.6">600m</option>
+						    <option value="0.7">700m</option>
+						    <option value="0.8">800m</option>
+						    <option value="0.9">900m</option>
+						    <option value="1">1km</option>
+						    <option value="2">2km</option>
+						    <option value="3">3km</option>
+						    <option value="4">4km</option>
+						    <option value="5">5km</option>
+						    <option value="6">6km</option>
+						    <option value="7">7km</option>
+						    <option value="8">8km</option>
+						    <option value="9">9km</option>
+						    <option value="10">10km</option>
+				  		</select>
+			  		</div>
+			  		<div class="col-md-8">
+			  			<button class="btn btn-primary" id="button-show-roads">Show Roads Near Selected Place</button>
+					</div>
+				</div>
+
+				<hr>	
+
+				<label type="text">Places near selected river<span id="selected_river_span"></span>:</label>
+				<div class="row">
+					<div class="col-md-4">
+						<select class="form-control" id="distance-from-river">
+						  	<option value="0.1">100m</option>
+						    <option value="0.2">200m</option>
+						    <option value="0.3">300m</option>						    
+				  		</select>
+			  		</div>
+			  		<div class="col-md-8">
+			  			<button class="btn btn-primary" id="button-show-places-near-river">Show Places Near Selected River</button>
+					</div>
+				</div>
+
+				<hr>
+
+				<label type="text">Points of interest in a type of landuse:</label>
+				<div class="row">
+					<div class="col-md-4">
+						 <select class="form-control" id="landuse_type">
+						 	<option value="all">all</option>
+						  	<option value="park">park</option>
+						    <option value="residential">residential</option>
+						    <option value="industrial">industrial</option>		
+						    <option value="cemetery">cemetery</option>
+						    <option value="forest">forest</option>
+						    <option value="grass">grass</option>
+		  				</select>
+		  
+			  		</div>
+			  		<div class="col-md-8">
+			  			<button class="btn btn-primary" id="button-show-places-in-selected-landuse">Show POIS In Selected Landuse</button>
+					</div>
+				</div>
+
+				<hr>
+
+				<label type="text">Transports in selected radius:</label>
+				<div class="row">
+					<div class="col-md-3">
+						<div class="checkbox">
+		  					<input type="checkbox" value="" id="draw_marker_checkbox" class="css-checkbox"><label class="css-label" for="draw_marker_checkbox">Activated</label>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<select class="form-control" id="radius_from_point">
+							<option value="all">all</option>
+						  	<option value="0.1">100m</option>
+						    <option value="0.2">200m</option>
+						    <option value="0.3">300m</option>	
+						    <option value="0.4">400m</option>
+						    <option value="0.5">500m</option>
+						    <option value="0.6">600m</option>
+						    <option value="0.7">700m</option>
+						    <option value="0.8">800m</option>
+						    <option value="0.9">900m</option>
+						    <option value="1">1km</option>
+						    <option value="2">2km</option>
+						    <option value="3">3km</option>
+						    <option value="4">4km</option>
+						    <option value="5">5km</option>
+						    <option value="6">6km</option>
+						    <option value="7">7km</option>
+						    <option value="8">8km</option>
+						    <option value="9">9km</option>
+						    <option value="10">10km</option>					    
+				  		</select>
+					</div>
+					<div class="col-md-6">
+						<button class="btn btn-primary" id="button-show-transport-near">Show Near Transports</button>
+					</div>
+				</div>
+
+				<hr>
+
+				<div class="row">
+					<div class="col-md-6">
+						<label type="text">Roads selected with a drawn polygon:</label>
+						<div class="checkbox">
+							<input type="checkbox" value="" id="draw_polygon_checkbox" class="css-checkbox"><label class="css-label" for="draw_polygon_checkbox">Activated</label>
+						</div>
+
+					</div>
+					<div class="col-md-6">
+						<div class="checkbox">
+		  					<input type="checkbox" value="" id="geolocation_checkbox" class="css-checkbox"><label class="css-label" for="geolocation_checkbox">Geolocation</label>
+						</div>
+						<button class="btn btn-primary width100" id="button-locate-me">Locate Me</button>
+					</div>
+				</div>
+
+				<hr>
+
+				<div class="row">
+					<div class="col-md-6">
+						
+					</div>
+					<div class="col-md-6">
+						
+					</div>
+				</div>		
+
+	      </div>
+	
+	    </div>
+	  </div>
+	</div>
+
+
+	<div>
+		<div id="list-items">
+			<ul class="list-group scrollable" id="display-list">
+
+			  <li class="list-group-item">No places have been loaded.
+			  </li>
+			</ul>
+		</div>
+
+		<div id="one-item" style="display:none">
+			<div class="panel panel-primary">
+			  <div class="panel-heading" id="one-item-heading"><span class="pull-left glyphicon glyphicon-circle-arrow-left glyph-left"></span>Place details</div>
+			  <div class="panel-body" id="one-item-content">
+			  	
+			  </div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+</div>
+
+</div>
+
+	<script src="js/jquery-3.1.1.js"></script>
+	<script src="OpenLayers/OpenLayers.debug.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
