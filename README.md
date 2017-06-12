@@ -4,6 +4,8 @@ Web GIS project for Geographic Information Systems class using OpenLayers as map
 
 (OpenLayers, Geoserver, OpenStreetMaps data, PostGIS/PostgreSQL)
 
+More details in the Power Point presentation.
+
 ## Installation
 
 Open index.html file with any browser. Needs a running and configured instances of PostresSQL/PostGIS and Geoserver.
